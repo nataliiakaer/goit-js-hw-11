@@ -1,4 +1,3 @@
-import './css/styles.css';
 import NewsApiService from './js/api-set';
 import { lightbox } from './js/lightbox';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
@@ -21,6 +20,11 @@ const options = {
 };
 const observer = new IntersectionObserver(onLoadMore, options);
 
+function onLoadMore() {
+  newsApiService.incrementPage();
+  fetchGallery();
+}
+
 function onSearch(element) {
   element.preventDefault();
 
@@ -35,12 +39,6 @@ function onSearch(element) {
   }
 
   isShown = 0;
-  fetchGallery();
-  onRenderGallery(hits);
-}
-
-function onLoadMore() {
-  newsApiService.incrementPage();
   fetchGallery();
 }
 
