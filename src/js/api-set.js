@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default class NewsApiService {
+export class NewsApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
@@ -33,11 +33,11 @@ export default class NewsApiService {
   }
 
   incrementPage() {
-    this.page += 1;
+    return (this.page += 1);
   }
 
   resetPage() {
-    this.page = 1;
+    return (this.page = 1);
   }
 
   resetEndOfHits() {

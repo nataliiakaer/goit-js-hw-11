@@ -1,24 +1,13 @@
-import NewsApiService from './js/api-set';
-import { lightbox } from './js/lightbox';
+import { NewsApiService } from './js/api-set';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { onRenderGallery } from './js/createMarkup';
+import { refs } from './js/refs';
 
-const refs = {
-  searchForm: document.querySelector('.search-form'),
-  galleryContainer: document.querySelector('.gallery-list'),
-  loadMoreBtn: document.querySelector('.load-more'),
-};
 let isShown = 0;
 const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
-
-const options = {
-  rootMargin: '50px',
-  root: null,
-  threshold: 0.3,
-};
-const observer = new IntersectionObserver(onLoadMore, options);
 
 function onLoadMore() {
   newsApiService.incrementPage();
@@ -58,6 +47,7 @@ async function fetchGallery() {
   }
 
   onRenderGallery(hits);
+
   isShown += hits.length;
 
   if (isShown < total) {
@@ -68,46 +58,4 @@ async function fetchGallery() {
   if (isShown >= total) {
     Notify.info("We're sorry, but you've reached the end of search results.");
   }
-}
-
-function onRenderGallery(elements) {
-  const markup = elements
-    .map(
-      ({
-        webformatURL,
-        largeImageURL,
-        tags,
-        likes,
-        views,
-        comments,
-        downloads,
-      }) => {
-        return `<li class="gallery-item"><div class="photo-card">
-    <a href="${largeImageURL}">
-      <img class="photo-img" src="${webformatURL}" alt="${tags}" loading="lazy" />
-    </a>
-    <div class="info">
-      <p class="info-item">
-        <b>Likes</b>
-        ${likes}
-      </p>
-      <p class="info-item">
-        <b>Views</b>
-        ${views}
-      </p>
-      <p class="info-item">
-        <b>Comments</b>
-        ${comments}
-      </p>
-      <p class="info-item">
-        <b>Downloads</b>
-        ${downloads}
-      </p>
-    </div>
-    </div></li>`;
-      }
-    )
-    .join('');
-  refs.galleryContainer.insertAdjacentHTML('beforeend', markup);
-  lightbox.refresh();
 }
