@@ -3,12 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Page title</title>
-    <link rel="stylesheet" href="./sass/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+      integrity="sha384-o+5dWaAxicpWsXNbxiBxHQNbMq1tRddfYsg5r/6h5cD+KZw3QfmQJdzSik6aFj3E"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="./css/styles.css" />
+    <title>Gallery search</title>
   </head>
   <body>
     <section class="header__container">
       <form class="search-form" id="search-form">
+        <a href="https://pixabay.com/" target="_blank"> </a>
         <input
           class="search-form__input"
           type="text"
@@ -16,35 +24,22 @@
           autocomplete="off"
           placeholder="Search images..."
         />
-        <button type="submit" class="search-form__btn">
-          <svg class="icon-search" width="16" height="16">
-            <use href="./images/search.svg#icon-search"></use>
-          </svg>
+        <button class="search-form__button" type="submit">
+          <img
+            class="img-search"
+            src="./img/search.png"
+            alt="search"
+            width="20"
+          />
         </button>
       </form>
     </section>
     <div class="gallery">
-      <!-- Картки зображень -->
-      <ul class="gallery-list">
-        <!-- <li class="gallery-item">
-          <div class="photo-card">
-            <a class="photo-link" href="">
-              <img
-                class="photo-img"
-                src="https://www.shutterstock.com/image-vector/ramadan-icon-100px-x-260nw-1104059588.jpg"
-                alt="Nature Canaada"
-                loading="lazy"
-              />
-            </a>
-            <div class="info">
-              <p class="info-item"><b>Likes</b>2090</p>
-              <p class="info-item"><b>Views</b>676272</p>
-              <p class="info-item"><b>Comments</b>334</p>
-              <p class="info-item"><b>Downloads</b>304884</p>
-            </div>
-          </div>
-        </li> -->
-      </ul>
+      <ul class="gallery-list"></ul>
     </div>
+    <div class="load-container">
+      <button type="button" class="load-more is-hidden">Load more</button>
+    </div>
+    <script src="./index.js" type="module"></script>
   </body>
 </html>
